@@ -26,12 +26,13 @@ class Expenses {
   }
 
   static chart(user_id) {
-    const sql = `SELECT c.name AS category, SUM(e.amount) AS total_amount
-    FROM expenses e
-    JOIN category c ON e.category_id = c.id
-    WHERE e.user_id = $1
-    GROUP BY c.name
-    ORDER BY total_amount DESC;`
-    return db.query(sql), [user_id].then(res => res.rows)
+    const sql = `select c.name AS category, SUM(e.amount) AS total_amount
+    from expenses e
+    join category c ON e.category_id = c.id
+    where e.user_id = $1
+    group by c.name
+    order by total_amount DESC;`
+    return db.query(sql, [user_id]).then(res => res.rows)
   }
 }
+module.exports = Expenses

@@ -2,9 +2,14 @@ const db = require("../db")
 const bcrypt = require("bcrypt")
 
 class Users {
+  static findAll() {
+    const sql = `select * from users;`
+    return db.query(sql).then(res => res.rows)
+  }
+
   static create(name, email, password) {
     const sql =
-      "insert into table users (name, email, password) values ($1, $2, $3) returning *;"
+      "insert into users (name, email, password_digest) values ($1, $2, $3) returning *;"
 
     return bcrypt
       .genSalt(10)
@@ -13,7 +18,7 @@ class Users {
   }
 
   static update(id, name, email, password) {
-    const sql = `update users set name = $1, email = $2, password = $3 where id = $4;`
+    const sql = `update users set name = $1, email = $2, password = $3 where id = $4 returning *;`
     return bcrypt
       .genSalt(10)
       .then(salt => bcrypt.hash(password, salt))
