@@ -1,6 +1,6 @@
 const db = require("../db")
 
-class Income {
+class Incomes {
   static findAll(user_id) {
     const sql = "select * from income where user_id = $1;"
     return db.query(sql, [user_id]).then(res => res.rows)
@@ -31,4 +31,4 @@ class Income {
   }
 }
 
-module.exports = Income
+module.exports = Incomes
