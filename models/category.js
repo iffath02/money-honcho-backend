@@ -11,3 +11,5 @@ class Category {
     return db.query(sql, [name]).then(res => res.rows[0])
   }
 }
+
+module.exports = Category

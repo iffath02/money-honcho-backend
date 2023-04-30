@@ -12,6 +12,12 @@ CREATE TABLE category (
     name TEXT NOT NULL
 );
 
+CREATE TABLE user_category (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    user_id Integer REFERENCES users(id)
+);
+
 CREATE TABLE income (
     id SERIAL PRIMARY KEY,
     user_id Int,
