@@ -18,10 +18,15 @@ CREATE TABLE user_category (
     user_id Integer REFERENCES users(id)
 );
 
+CREATE TABLE income_accounts (
+    id SERIAL PRIMARY KEY,
+    type TEXT
+);
+
 CREATE TABLE income (
     id SERIAL PRIMARY KEY,
     user_id Int,
-    type TEXT,
+    account_id Integer REFERENCES income_accounts(id),
     amount decimal,
 
     CONSTRAINT FK_user FOREIGN KEY(user_id)

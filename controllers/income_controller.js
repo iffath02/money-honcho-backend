@@ -4,31 +4,32 @@ const Incomes = require("../models/income")
 
 router.use(express.json())
 
-router.get("/", (req, res) => {
-  const { user_id } = req.body
+router.get("/:user_id", (req, res) => {
+  const user_id = req.params.user_id
   Incomes.findAll(user_id).then(incomes => res.json(incomes))
 })
 
-router.post("/", (req, res) => {
-  const { user_id, type, amount } = req.body
-  Incomes.create(user_id, type, amount).then(income => res.json(income))
+router.post("/:user_id", (req, res) => {
+  const user_id = req.params.user_id
+  const { account_id, amount } = req.body
+  Incomes.create(user_id, account_id, amount).then(income => res.json(income))
 })
 
 router.put("/:id", (req, res) => {
   const id = req.params.id
-  const { user_id, type, amount } = req.body
-  Incomes.update(id, user_id, category_id, type, amount).then(income =>
+  const { user_id, account_id, amount } = req.body
+  Incomes.update(id, user_id, account_id, amount).then(income =>
     res.json(income)
   )
 })
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id
-  Incomes.destroy(id)
+  Incomes.destroy(id).then(income => res.json(income))
 })
 
-router.get("/chart", (req, res) => {
-  const { user_id } = req.body
+router.get("/chart/:user_id", (req, res) => {
+  const user_id = req.params.user_id
   Incomes.chart(user_id).then(chart => res.json(chart))
 })
 

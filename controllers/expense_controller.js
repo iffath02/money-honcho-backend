@@ -4,13 +4,14 @@ const Expenses = require("../models/expenses")
 
 router.use(express.json())
 
-router.get("/", (req, res) => {
-  const { user_id } = req.body
+router.get("/:user_id", (req, res) => {
+  const user_id = req.params.user_id
   Expenses.findAll(user_id).then(expenses => res.json(expenses))
 })
 
-router.post("/", (req, res) => {
-  const { user_id, category_id, spent_on, amount } = req.body
+router.post("/:user_id", (req, res) => {
+  const user_id = req.params.user_id
+  const { category_id, spent_on, amount } = req.body
   Expenses.create(user_id, category_id, spent_on, amount).then(expense =>
     res.json(expense)
   )
@@ -26,11 +27,11 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id
-  Expenses.destroy(id)
+  Expenses.destroy(id).then(expense => res.json(expense))
 })
 
-router.get("/chart", (req, res) => {
-  const { user_id } = req.body
+router.get("/chart/:user_id", (req, res) => {
+  const user_id = req.params.user_id
   Expenses.chart(user_id).then(chart => res.json(chart))
 })
 

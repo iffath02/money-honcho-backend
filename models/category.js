@@ -1,8 +1,13 @@
 const db = require("../db")
 
 class Category {
-  static findAll() {
+  static findAllExpense() {
     const sql = "select * from category;"
+    return db.query(sql).then(res => res.rows)
+  }
+
+  static findAllIncome() {
+    const sql = "select * from income_accounts;"
     return db.query(sql).then(res => res.rows)
   }
 

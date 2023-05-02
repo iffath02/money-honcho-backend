@@ -14,8 +14,8 @@ class Expenses {
   }
 
   static destroy(id) {
-    const sql = `delete from expenses where id = $1;`
-    return db.query(sql, [id])
+    const sql = `delete from expenses where id = $1 returning *;`
+    return db.query(sql, [id]).then(res => res.rows[0])
   }
 
   static update(id, user_id, category_id, spent_on, amount) {

@@ -5,8 +5,12 @@ const Category = require("../models/category")
 
 router.use(express.json())
 
-router.get("/", (req, res) => {
-  Category.findAll().then(categories => res.json(categories))
+router.get("/expense", (req, res) => {
+  Category.findAllExpense().then(categories => res.json(categories))
+})
+
+router.get("/income", (req, res) => {
+  Category.findAllIncome().then(accounts => res.json(accounts))
 })
 
 router.post("/", (req, res) => {

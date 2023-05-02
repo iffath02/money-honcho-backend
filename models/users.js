@@ -7,6 +7,16 @@ class Users {
     return db.query(sql).then(res => res.rows)
   }
 
+  static findOneByEmail(email) {
+    const sql = "select * from users where email = $1;"
+    return db.query(sql, [email]).then(res => res.rows[0])
+  }
+
+  static findOneById(id) {
+    const sql = "select * from users where id = $1;"
+    return db.query(sql, [id]).then(res => res.rows[0])
+  }
+
   static create(name, email, password) {
     const sql =
       "insert into users (name, email, password_digest) values ($1, $2, $3) returning *;"
