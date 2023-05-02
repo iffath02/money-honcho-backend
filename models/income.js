@@ -18,7 +18,7 @@ class Incomes {
   }
 
   static update(id, user_id, account_id, amount) {
-    const sql = `update income set user_id = $1, type = $2, amount = $3 where id=$4 returning *;`
+    const sql = `update income set user_id = $1, account_id = $2, amount = $3 where id=$4 returning *;`
     return db
       .query(sql, [user_id, account_id, amount, id])
       .then(res => res.rows[0])
