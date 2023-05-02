@@ -2,7 +2,7 @@ const db = require("../db")
 
 class Expenses {
   static findAll(user_id) {
-    const sql = `select * from expenses where user_id = $1`
+    const sql = `select e.*, c.name AS category from expenses e join category c ON e.category_id = c.id where user_id = $1`
     return db.query(sql, [user_id]).then(res => res.rows)
   }
 
