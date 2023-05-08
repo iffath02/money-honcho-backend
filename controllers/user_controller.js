@@ -10,23 +10,29 @@ router.use(express.json())
 //   Users.findAll().then(users => res.json(users))
 // })
 
-router.get("/:user_id", (req, res) => {
+router.get("/:user_id", (req, res, next) => {
   const user_id = req.params.user_id
-  Users.findOneById(user_id).then(user => res.json(user))
+  Users.findOneById(user_id)
+    .then(user => res.json(user))
+    .catch(next)
 })
 
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   const { name, email, password } = req.body
-  Users.create(name, email, password).then(user => res.json(user))
+  Users.create(name, email, password)
+    .then(user => res.json(user))
+    .catch(next)
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", (req, res, next) => {
   const id = req.params
   const { name, email, password } = req.body
-  Users.update(id, name, email, password).then(user => res.json(user))
+  Users.update(id, name, email, password)
+    .then(user => res.json(user))
+    .catch(next)
 })
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res, next) => {
   const { email, password } = req.body
   try {
     let user = await Users.findOneByEmail(email)
@@ -43,6 +49,7 @@ router.post("/login", async (req, res) => {
     res.json(token)
   } catch (err) {
     console.log(err)
+    next(err)
   }
 })
 
