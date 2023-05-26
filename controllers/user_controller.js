@@ -12,24 +12,18 @@ router.use(express.json())
 
 router.get("/:user_id", (req, res, next) => {
   const user_id = req.params.user_id
-  Users.findOneById(user_id)
-    .then(user => res.json(user))
-    .catch(next)
+  Users.findOneById(user_id).then(user => res.json(user))
 })
 
 router.post("/", (req, res, next) => {
   const { name, email, password } = req.body
-  Users.create(name, email, password)
-    .then(user => res.json(user))
-    .catch(next)
+  Users.create(name, email, password).then(user => res.json(user))
 })
 
 router.put("/:id", (req, res, next) => {
   const id = req.params
   const { name, email, password } = req.body
-  Users.update(id, name, email, password)
-    .then(user => res.json(user))
-    .catch(next)
+  Users.update(id, name, email, password).then(user => res.json(user))
 })
 
 router.post("/login", async (req, res, next) => {

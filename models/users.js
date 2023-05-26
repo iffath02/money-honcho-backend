@@ -9,11 +9,13 @@ class Users {
 
   static findOneByEmail(email) {
     const sql = "select * from users where email = $1;"
+
     return db.query(sql, [email]).then(res => res.rows[0])
   }
 
   static findOneById(id) {
     const sql = "select * from users where id = $1;"
+
     return db.query(sql, [id]).then(res => res.rows[0])
   }
 

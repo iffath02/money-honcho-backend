@@ -6,22 +6,16 @@ const Category = require("../models/category")
 router.use(express.json())
 
 router.get("/expense", (req, res, next) => {
-  Category.findAllExpense()
-    .then(categories => res.json(categories))
-    .catch(next)
+  Category.findAllExpense().then(categories => res.json(categories))
 })
 
 router.get("/income", (req, res, next) => {
-  Category.findAllIncome()
-    .then(accounts => res.json(accounts))
-    .catch(next)
+  Category.findAllIncome().then(accounts => res.json(accounts))
 })
 
 router.post("/", (req, res, next) => {
   const { name } = req.body
-  Category.create(name)
-    .then(category => res.json(category))
-    .catch(next)
+  Category.create(name).then(category => res.json(category))
 })
 
 module.exports = router
