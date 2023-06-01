@@ -12,7 +12,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://react-money-honcho.onrender.com/",
+      "https://react-money-honcho.onrender.com",
     ],
     // methods: ["GET", "POST", "PUT", "DELETE"],
   })
