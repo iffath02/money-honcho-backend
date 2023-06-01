@@ -22,10 +22,6 @@ app.use(express.static("public"))
 app.use(express.json())
 app.use(checkToken)
 
-app.get("/", (req, res, next) => {
-  res.json("hello")
-})
-
 app.use("/api/expenses", expenseController)
 app.use("/api/users", userController)
 app.use("/api/category", categoryController)
