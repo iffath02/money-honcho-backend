@@ -6,19 +6,19 @@ const userController = require("./controllers/user_controller")
 const categoryController = require("./controllers/category_controller")
 const incomeController = require("./controllers/income_controller")
 const checkToken = require("./lib/checkToken")
-const cors = require("cors")
+// const cors = require("cors")
 
 app.use(express.static("public"))
 app.use(express.json())
 app.use(checkToken)
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://react-money-honcho.onrender.com",
-    ],
-  })
-)
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "https://react-money-honcho.onrender.com",
+//     ],
+//   })
+// )
 
 app.use("/api/expenses", expenseController)
 app.use("/api/users", userController)
